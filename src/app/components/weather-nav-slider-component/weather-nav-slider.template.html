@@ -1,0 +1,18 @@
+<div
+  *ngIf="data[dateId]"
+  class="weather-nav-slider">
+  <div
+    class="weather-nav-item"
+    *ngFor="let item of data; let i = index"
+    (click)="onNavClick(i)"
+    [class.weather-nav-item_active]="i == dateId"
+    [ngStyle]="{'min-width.px': itemWidth}"
+  >
+    <span class="weather-nav-item__date">{{item['date'] }}</span>
+    <div class="weather-nav-item__info-wrapper">
+      <span class="weather-nav-item__temp">{{ item['temp'] }}</span>
+      <img src="assets/images/{{ item['icon'] }}" class="weather-nav-item__icon" alt="image">
+    </div>
+  </div>
+</div>
+

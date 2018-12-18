@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <ml-header-nav
+    id="menu_bottom"
+    [searchString]="searchString"
+    [hidden]="isLoading"
+    [backButton]="backButton"
+    [geoName]="geoName"
+    (onEmmitSearchClick)="searchLocation($event)"
+    (onEmmitCurrentLocation)="addCurrentLocation()"
+  ></ml-header-nav>
+  <ml-image
+    [imageHeight]="imageHeight"
+    [dateId]="dateId"
+    [hidden]="isLoading"
+    [data]="data"
+  ></ml-image>
+  <ml-weather-nav-slider
+    [hidden]="isLoading"
+    [data]="data"
+    [dateId]="dateId"
+    [itemWidth]="itemWidth"
+    (onEmmit)="getDataId($event)"
+  ></ml-weather-nav-slider>
+</div>
+<ml-popup
+  [data]="popupData"
+  [hidden]="popupIsClosed"
+  (onEmmitClosePopup)="closePopup()"
+  (onEmmitAnotherLocation)="addAnotherLocation($event)"
+></ml-popup>
+<ml-loader
+  [loaderIsClosed]="!isLoading"
+></ml-loader>

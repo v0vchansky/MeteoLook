@@ -1,0 +1,84 @@
+.header {
+  width: 100%;
+  height: 60px;
+  background: #4A76A8;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header__input-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 7px;
+  background: #224B7A;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+
+.header__input {
+  border: 0;
+  padding: 0 0 0 10px;
+  text-align: center;
+  color: #fff;
+  /*font-size: 20px;*/
+  font-weight: 200;
+  background: #224B7A;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  outline: none;
+}
+
+.header__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-weight: 400;
+  color: #BFCEE0;
+}
+.header__input::-moz-placeholder { /* Firefox 19+ */
+  font-weight: 400;
+  color: #BFCEE0;
+}
+.header__input:-ms-input-placeholder { /* IE 10+ */
+  font-weight: 400;
+  color: #BFCEE0;
+}
+.header__input:-moz-placeholder { /* Firefox 18- */
+  font-weight: 400;
+  color: #BFCEE0;
+}
+
+.header__input-button {
+  border: 0;
+  background: #224B7A;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  outline: none;
+  margin: -5px 2px 0 0;
+}
+
+.header__input-button img {
+  width: 20px;
+}
+
+.header__button {
+  border: 0;
+  background: #224B7A;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px
+}
+
+.header__button img {
+  width: 20px;
+}
+
