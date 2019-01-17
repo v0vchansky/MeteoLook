@@ -4,7 +4,6 @@ import { DATA_ACTION, DataAction } from '../actions/data.action';
 const initialState = {
   data: [],
   isLoading: true,
-  geoName: '',
 };
 
 export function dataReducer(state = initialState , action: DataAction) {
@@ -14,26 +13,32 @@ export function dataReducer(state = initialState , action: DataAction) {
         ...state,
         data: JSON.parse(localStorage.getItem('data')),
         isLoading: action.payload,
-        lat: Number(JSON.parse(localStorage.getItem('lat'))),
-        lon: Number(JSON.parse(localStorage.getItem('lon'))),
-        geoName: localStorage.getItem('geoName'),
+        user: JSON.parse(localStorage.getItem('user')),
+        time: +localStorage.getItem('time'),
       };
     case DATA_ACTION.GET_DATA:
       localStorage.setItem('data', action.payload);
+      localStorage.setItem('time', String(Math.round((new Date()).getTime() / 1000) + 10800));
       return {
         ...state,
         data: JSON.parse(action.payload),
-        isLoading: false
+        time: String(Math.round((new Date()).getTime() / 1000) + 10800),
+        isLoading: false,
       };
-    case  DATA_ACTION.SET_LOCATION:
-      localStorage.setItem('lat', String(action.payload.lat));
-      localStorage.setItem('lon', String(action.payload.lon));
-      localStorage.setItem('geoName', String(action.payload.geoName));
+    case DATA_ACTION.SET_USER_INFO:
+      localStorage.setItem('user', JSON.stringify(action.payload));
+      localStorage.setItem('time', String(Math.round((new Date()).getTime() / 1000) + 10800));
       return {
         ...state,
-        lat: action.payload.lat,
-        lon: action.payload.lon,
-        geoName: action.payload.geoName
+        user: action.payload,
+      };
+    case DATA_ACTION.SET_SETTINGS:
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      localStorage.setItem('data', JSON.stringify(action.payload.data));
+      return {
+        ...state,
+        data: action.payload.data,
+        user: action.payload.user
       };
     default:
       return state

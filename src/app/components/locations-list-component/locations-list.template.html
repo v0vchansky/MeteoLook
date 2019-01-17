@@ -1,0 +1,16 @@
+<div
+  *ngIf="data; else dataIsEmpty"
+>
+  <div
+    class="popup-container__item"
+    (click)="onAddAnotherLocation(i)"
+    *ngFor="let item of data; let i = index"
+  >
+    {{ data[i]['display_name'] }}
+  </div>
+</div>
+<ng-template #dataIsEmpty>
+  <div class="popup-container__body popup-content_padding popup-content__empty-data">
+    Ничего не найдено
+  </div>
+</ng-template>

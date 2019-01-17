@@ -9,12 +9,12 @@ export class GetService {
 
   get(sex: string, lat: number, lon: number) : Observable<any> {
     return this.http
-      .get('http://localhost:8000/?sex=' + sex + '&lat=' + lat + '&lon=' + lon)
+      .get('http://46.17.44.57/?sex=' + sex + '&lat=' + lat + '&lon=' + lon)
   }
 
   getGeoLocation(searchString: string) : Observable<any> {
     return this.http
-      .get(' https://nominatim.openstreetmap.org/search/' + searchString + '?format=json')
+      .get('https://nominatim.openstreetmap.org/search/' + searchString + '?format=json')
   }
 
   getGeoName(lat: number, lon: number) : Observable<any> {

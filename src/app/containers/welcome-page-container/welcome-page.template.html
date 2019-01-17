@@ -1,0 +1,22 @@
+<div
+  [hidden]="isLoading"
+  class="welcome-page-wrapper">
+  <div class="welcome-page-header">
+    <span class="welcome-page-header__welcome">Привет :)</span>
+  </div>
+  <ml-user-settings
+    [data]="data"
+    [sex]="sex"
+    [formErrors]="formErrors"
+    (onFormSubmitEmmit)="submitSettingsForm($event)"
+  ></ml-user-settings>
+</div>
+<ml-popup
+  [data]="popupData"
+  [hidden]="popupIsClosed"
+  (onEmmitClosePopup)="closePopup()"
+  (onEmmitAnotherLocation)="addUserLocation($event)"
+></ml-popup>
+<ml-loader
+  [loaderIsClosed]="!isLoading"
+></ml-loader>

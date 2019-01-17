@@ -7,6 +7,7 @@
     [geoName]="geoName"
     (onEmmitSearchClick)="searchLocation($event)"
     (onEmmitCurrentLocation)="addCurrentLocation()"
+    (onEmmitOpenSettings)="openSettings()"
   ></ml-header-nav>
   <ml-image
     [imageHeight]="imageHeight"
@@ -28,6 +29,12 @@
   (onEmmitClosePopup)="closePopup()"
   (onEmmitAnotherLocation)="addAnotherLocation($event)"
 ></ml-popup>
+<ml-settings-popup
+  [data]="settingsPopUpData"
+  [hidden]="settingsPopUpIsClosed"
+  (onEmmitClosePopup)="closeSettingsPopUp()"
+  (onFormSubmitEmmit)="submitSettingsForm($event)"
+></ml-settings-popup>
 <ml-loader
   [loaderIsClosed]="!isLoading"
 ></ml-loader>

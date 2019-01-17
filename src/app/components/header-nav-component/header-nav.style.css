@@ -1,11 +1,11 @@
 .header {
   width: 100%;
   height: 60px;
+  padding: 11px 10px 11px 10px;
   background: #4A76A8;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .header__input-wrapper {
@@ -18,6 +18,8 @@
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
+  margin: 0 10px 0 10px;
+  max-width: 70%
 }
 
 .header__input {
@@ -32,6 +34,7 @@
   -moz-border-radius: 50px;
   border-radius: 50px;
   outline: none;
+  width: 100%;
 }
 
 .header__input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -67,6 +70,7 @@
 
 .header__button {
   border: 0;
+  height: 38px;
   background: #224B7A;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
@@ -80,5 +84,15 @@
 
 .header__button img {
   width: 20px;
+}
+
+.header__menu-buttons {
+
+  height: 300px;
+}
+
+.header__menu-button-item {
+  height: 38px;
+  margin-bottom: 11px;
 }
 

@@ -1,6 +1,6 @@
 .popup-wrapper {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   background-color: rgba(0, 0, 0, 0.7);
   left: 0;
   top: 0;
@@ -85,4 +85,11 @@
 
 .popup-container__item::-webkit-scrollbar {
   display: none;
+}
+
+.popup-content__empty-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #BFD0E4;
 }

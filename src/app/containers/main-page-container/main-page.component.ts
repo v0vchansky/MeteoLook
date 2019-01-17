@@ -5,26 +5,36 @@ import { ActivatedRoute } from '@angular/router';
 // Models
 import { serverData } from '../../models/serverData.model';
 import { AppState } from '../../app.state';
+import { User } from '../../models/user.model';
 // Services
 import { GetService } from '../../services/get.service';
-import {GetData} from '../../actions/data.action';
+import { ValidatorService } from '../../services/validator.service';
+import {GetData, SetSettings, SetUserInfo} from '../../actions/data.action';
 
 @Component({
   selector: 'ml-main-page',
   templateUrl: './main-page.template.html',
   styleUrls: ['./main-page.style.css'],
-  providers: [GetService]
+  providers: [GetService, ValidatorService]
 })
 
 export class MainPageComponent implements OnInit {
 
-  data?: serverData[];
+  data: serverData[];
+  user: User;
+  sex: string;
   dateId: number;
   isLoading: boolean = true;
   itemWidth: number;
   imageHeight: number;
+
   popupIsClosed: boolean = true;
   popupData: any;
+
+  settingsPopUpIsClosed: boolean = true;
+  settingsPopUpData: any = [];
+  formErrors: any;
+
   isAnotherLocation: boolean = false;
   geoName: string;
   searchString: string;
@@ -34,16 +44,19 @@ export class MainPageComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private GetService: GetService,
+    private ValidatorService: ValidatorService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.backButton = 'hidden';
-    this.store.select('data').subscribe(({data, isLoading, geoName, lat}) => {
-      console.log(data, isLoading, geoName, lat);
+    this.store.select('data').subscribe(({data, isLoading, user}) => {
+      console.log(data, isLoading);
       this.isLoading = isLoading;
       this.data = data;
-      this.geoName = geoName;
+      this.user = user;
+      this.geoName = user.geoLocation;
       this.dateId = 0;
+      this.isLoading = false
     });
     this.itemWidth = document.documentElement.clientWidth / 3;
     this.imageHeight = document.documentElement.clientHeight - 220;
@@ -52,30 +65,74 @@ export class MainPageComponent implements OnInit {
   addAnotherLocation(i) {
     this.closePopup();
     this.isLoading = true;
-    this.GetService.get('man', this.popupData[i].lat,this.popupData[i].lon).subscribe(data => {
+    if (!this.settingsPopUpIsClosed) {
+      this.closeSettingsPopUp();
+      this.GetService.get(this.sex, this.popupData[i].lat,this.popupData[i].lon).subscribe(data => {
+        this.user = {
+          geoLocation: this.popupData[i].display_name,
+          lat: this.popupData[i].lat,
+          lon: this.popupData[i].lon,
+          sex: this.sex
+        };
+        this.data = data;
+        this.store.dispatch(new SetSettings({
+          user: this.user,
+          data: data
+        }));
+        this.backButton = 'hidden';
+        this.searchString = '';
+        this.geoName = this.user.geoLocation;
+        this.isLoading = false;
+      });
+    } else {
+      this.GetService.get(this.user.sex, this.popupData[i].lat,this.popupData[i].lon).subscribe(data => {
         this.data = data;
         this.isAnotherLocation = true;
         this.backButton = 'visible';
         this.isLoading = false;
-      })
+      });
+    }
   }
 
   addCurrentLocation() {
-    this.store.select('data').subscribe(({data, isLoading}) => {
-      this.isLoading = isLoading;
+    this.store.select('data').subscribe(({data, isLoading, user}) => {
+      //this.isLoading = isLoading;
       this.data = data;
+      this.user = user;
       this.dateId = 0;
       this.backButton = 'hidden';
       this.searchString = '';
+      this.geoName = user.geoLocation;
     });
   }
 
   searchLocation(searchString) {
     this.GetService.getGeoLocation(searchString).subscribe((data) => {
-      console.log(data);
       this.popupData = data;
       this.popupIsClosed = false;
-    })
+      this.geoName = searchString
+    });
+  }
+
+  openSettings() {
+    this.settingsPopUpData = this.user;
+    this.settingsPopUpIsClosed = false;
+  }
+
+  submitSettingsForm(data) {
+    let errors = this.ValidatorService.settingsValidator(data);
+    if (errors.length != 0) {
+      this.popupIsClosed = true;
+      this.formErrors = errors;
+    } else {
+      this.formErrors = [];
+      this.sex = data.sex;
+      this.popupIsClosed = false;
+      this.GetService.getGeoLocation(data.geoLocation).subscribe((data) => {
+        this.popupData = data;
+        this.popupIsClosed = false;
+      });
+    }
   }
 
   getDataId(id) {
@@ -84,5 +141,9 @@ export class MainPageComponent implements OnInit {
 
   closePopup() {
     this.popupIsClosed = true;
+  }
+
+  closeSettingsPopUp() {
+    this.settingsPopUpIsClosed = true;
   }
 }

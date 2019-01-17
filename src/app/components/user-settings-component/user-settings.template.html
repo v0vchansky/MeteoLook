@@ -1,0 +1,64 @@
+<div class="user-settings-wrapper">
+  <form class="user-settings-form" (submit)="onSubmit(geoLocation.value)">
+    <div class="user-settings-form__inputs">
+      <label for="user-settings-form__geo-name-input" class="user-settings-form__labels user-settings-text">
+        Где ты живешь?
+        <br>
+        <span class="user-settings-form__labels__span">Если в большом городе, то напиши район :)</span></label>
+      <div class="user-settings-form__geo-name-input-wrapper">
+        <input
+          id="user-settings-form__geo-name-input"
+          class="user-settings-form__geo-name-input"
+          type="text"
+          placeholder="Геолокация"
+          value="{{ data['geoLocation'] }}"
+          #geoLocation
+        >
+        <!--<button class="user-settings-form__geo-name-button">-->
+          <!--<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDM4NCAzODQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDM4NCAzODQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMTkyLDEzNmMtMzAuODcyLDAtNTYsMjUuMTItNTYsNTZzMjUuMTI4LDU2LDU2LDU2czU2LTI1LjEyLDU2LTU2UzIyMi44NzIsMTM2LDE5MiwxMzZ6IE0xOTIsMjE2ICAgIGMtMTMuMjMyLDAtMjQtMTAuNzY4LTI0LTI0czEwLjc2OC0yNCwyNC0yNHMyNCwxMC43NjgsMjQsMjRTMjA1LjIzMiwyMTYsMTkyLDIxNnoiIGZpbGw9IiNiZmNlZTAiLz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0zNjgsMTc2aC0zMi45NDRDMzI3LjY0OCwxMDkuMzY4LDI3NC42MzIsNTYuMzUyLDIwOCw0OC45NDRWMTZjMC04LjgzMi03LjE2OC0xNi0xNi0xNmMtOC44MzIsMC0xNiw3LjE2OC0xNiwxNnYzMi45NDQgICAgQzEwOS4zNjgsNTYuMzUyLDU2LjM1MiwxMDkuMzY4LDQ4Ljk0NCwxNzZIMTZjLTguODMyLDAtMTYsNy4xNjgtMTYsMTZjMCw4LjgzMiw3LjE2OCwxNiwxNiwxNmgzMi45NDQgICAgQzU2LjM1MiwyNzQuNjMyLDEwOS4zNjgsMzI3LjY0OCwxNzYsMzM1LjA1NlYzNjhjMCw4LjgzMiw3LjE2OCwxNiwxNiwxNmM4LjgzMiwwLDE2LTcuMTY4LDE2LTE2di0zMi45NDQgICAgYzY2LjYzMi03LjQwOCwxMTkuNjQ4LTYwLjQyNCwxMjcuMDU2LTEyNy4wNTZIMzY4YzguODMyLDAsMTYtNy4xNjgsMTYtMTZDMzg0LDE4My4xNjgsMzc2LjgzMiwxNzYsMzY4LDE3NnogTTE5MiwzMDQgICAgYy02MS43NiwwLTExMi01MC4yNC0xMTItMTEyUzEzMC4yNCw4MCwxOTIsODBzMTEyLDUwLjI0LDExMiwxMTJTMjUzLjc2LDMwNCwxOTIsMzA0eiIgZmlsbD0iI2JmY2VlMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />-->
+        <!--</button>-->
+      </div>
+    </div>
+    <div class="user-settings-form__checkboxes">
+      <label class="user-settings-form__labels user-settings-text">Мальчик или девочка?</label>
+      <div class="user-settings-form__checkboxes-group">
+        <div class="user-settings-form__checkbox-group">
+          <label for="user-settings-form__checkbox__men">
+            <input
+              [(ngModel)]="sex"
+              #manRadioButton
+              value="man"
+              id="user-settings-form__checkbox__men"
+              name="type"
+              type="radio"
+              class="user-settings-form__checkbox user-settings-form__checkbox__men"
+            ></label>
+        </div>
+        <div class="user-settings-form__checkbox-group">
+          <label for="user-settings-form__checkbox__women">
+            <input
+              [(ngModel)]="sex"
+              #womanRadioButton
+              value="woman"
+              id="user-settings-form__checkbox__women"
+              name="type"
+              type="radio"
+              class="user-settings-form__checkbox user-settings-form__checkbox__women"
+            ></label>
+        </div>
+      </div>
+    </div>
+    <button class="user-settings-form__submit-button user-settings-text" type="submit">Отправить</button>
+  </form>
+  <div
+    *ngIf="formErrors"
+    class="user-settings__errors"
+  >
+    <div
+      *ngFor="let item of formErrors"
+      class="user-settings__error"
+    >
+      {{ item }}
+    </div>
+  </div>
+</div>

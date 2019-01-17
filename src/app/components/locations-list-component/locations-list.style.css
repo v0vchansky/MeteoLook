@@ -1,0 +1,21 @@
+.popup-container__item {
+  width: 100%;
+  word-wrap: normal;
+  border-bottom: #1b1e21 1px solid;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  font-size: 17px;
+  font-weight: 200;
+  color: #000;
+}
+
+.popup-container__item::-webkit-scrollbar {
+  display: none;
+}
+
+.popup-content__empty-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #BFD0E4;
+}

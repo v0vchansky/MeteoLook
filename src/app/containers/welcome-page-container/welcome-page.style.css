@@ -1,0 +1,23 @@
+.welcome-page-wrapper {
+  height: 100vh;
+  background: #EDEEF0;
+}
+
+ml-user-settings {
+  height: calc(100vh - 60px);
+}
+
+.welcome-page-header {
+  width: 100%;
+  height: 60px;
+  padding: 0 10px 0  10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.welcome-page-header__welcome {
+  font-size: 25px;
+  font-weight: 400;
+}
